@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="gwws-genwch",  # Replace with your own username
-    version="0.0.5",
+    version="0.0.6",
     author="genwch",
     author_email="",
     description="webscrape functions",
