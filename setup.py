@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="gwws-genwch",  # Replace with your own username
-    version="0.0.2",
+    version="0.0.3",
     author="genwch",
     author_email="",
     description="webscrape functions",
@@ -19,7 +19,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[
-        "geocomm-genwch",
+        "gwcomm-genwch",
         "requests",
         "BeautifulSoup4"
     ],
