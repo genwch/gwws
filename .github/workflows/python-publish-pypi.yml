@@ -8,16 +8,39 @@ on:
     types: [created, updated]
 
 jobs:
-  deploy:
-    if: "!github.event.release.prerelease"
-    environment: pypi
-
+  deploy-test:
+    
     if: "github.event.release.prerelease"
     environment: testpypi
-
+    
     runs-on: ubuntu-latest
 
-    steps:
+    steps:        
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install setuptools wheel twine
+      - name: Build and publish
+        env:
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+          TWINE_REPOSITORY: ${{ secrets.PYPI_REPO }}
+        run: |
+          python setup.py sdist bdist_wheel
+          twine upload --repository-url ${TWINE_REPOSITORY} dist/*
+  deploy:
+    
+    if: "!github.event.release.prerelease"
+    environment: pypi
+    
+    runs-on: ubuntu-latest
+
+    steps:        
       - uses: actions/checkout@v2
       - name: Set up Python
         uses: actions/setup-python@v2
