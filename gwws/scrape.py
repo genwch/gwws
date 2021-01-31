@@ -6,6 +6,7 @@ class scrape():
     def __init__(self, name=None, url=None, conf=None, *args, **kwargs):
         self._lg = comm.logger(f"scrape({name})")
         self._fullconf = conf
+        self._cont = ""
         if name == None:
             return
         self._para = kwargs
