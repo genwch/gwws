@@ -5,17 +5,16 @@ name: Upload Python Package
 
 on:
   release:
-    types: [created, updated]
+    types: [released, prereleased]
 
 jobs:
   deploy-test:
-    
     if: "github.event.release.prerelease"
     environment: testpypi
-    
+
     runs-on: ubuntu-latest
 
-    steps:        
+    steps:
       - uses: actions/checkout@v2
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -34,13 +33,12 @@ jobs:
           python setup.py sdist bdist_wheel
           twine upload --repository-url ${TWINE_REPOSITORY} dist/*
   deploy:
-    
     if: "!github.event.release.prerelease"
     environment: pypi
-    
+
     runs-on: ubuntu-latest
 
-    steps:        
+    steps:
       - uses: actions/checkout@v2
       - name: Set up Python
         uses: actions/setup-python@v2
