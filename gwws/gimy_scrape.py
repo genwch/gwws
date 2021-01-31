@@ -5,7 +5,7 @@ class gimy_scrape(scrape):
     def get(self, type, lst=None, conf=None):
         """Get Gimy objects
 
-        Arguments:
+        Arguments:1
             type {string} -- cats / subcats / medias / streams / links
 
         Keyword Arguments:
