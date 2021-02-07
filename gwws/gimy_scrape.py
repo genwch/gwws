@@ -38,8 +38,7 @@ class gimy_scrape(scrape):
         elif type == "streams":
             try:
                 if lst[0].get("scat_id", None) != None:
-                    lst = self.get(type="medias", lst=lst,
-                                   conf=conf) if lst == None else lst
+                    lst = self.get(type="medias", lst=lst, conf=conf)
                 else:
                     if lst[0].get("media_id", None) == None:
                         lst = None
@@ -52,9 +51,7 @@ class gimy_scrape(scrape):
             try:
                 if lst[0].get("media_id", None) == None:
                     lst = None
-                elif lst[0].get("st", None) == None:
-                    lst = None
-                elif lst[0].get("ep", None) == None:
+                elif lst[0].get("stream_ep", None) == None:
                     lst = None
             except:
                 lst = None
