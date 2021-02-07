@@ -111,6 +111,8 @@ class scrape():
                     # self._lg.debug(f"val: {val}, sp: {sp}")
                     val = self.__getpos(lst=sp, pos=v.get(
                         "pos", None), rtnlst=v.get("islist", False))
+                elif k == "isstrip" and v == True and isinstance(val, str):
+                    val = val.strip()
         return val
 
     def __validate(self, val, conf):
