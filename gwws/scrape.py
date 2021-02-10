@@ -45,14 +45,29 @@ class scrape():
             list -- list of elements
         """
         for c in conf.get("steps", []):
-            if cont != None:
-                cont = cont.find(c.get("tag"), c.get("attr", None))
+            if cont != None and cont != "":
+                try:
+                    cont = cont.find(c.get("tag"), c.get("attr", None))
+                except:
+                    self._lg.debug("find_all - \ncont: {}\ntag: {}\nattr: {}".format(cont, c.get("tag"), c.get(
+                        "attr", None)))
+                    cont = None
         if cont == None:
             return None
-        cont = cont.find_all(conf.get("tag"), conf.get(
-            "attr", None))
-        cont = self.__getpos(
-            lst=cont, pos=conf.get("pos", None), rtnlst=True)
+        try:
+            cont = cont.find_all(conf.get("tag"), conf.get(
+                "attr", None))
+        except:
+            self._lg.debug("find_all - \ncont: {}\ntag: {}\nattr: {}".format(cont, conf.get("tag"), conf.get(
+                "attr", None)))
+            cont = ""
+        try:
+            cont = self.__getpos(
+                lst=cont, pos=conf.get("pos", None), rtnlst=True)
+        except:
+            self._lg.debug(
+                "getpos - \ncont: {}\npos: {}".format(cont, conf.get("pos", None)))
+            cont = ""
         return cont
 
     def __getpos(self, lst, pos, rtnlst=False):
